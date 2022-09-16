@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 
 public class Itinerary {
-     private long ticketId;
+     private long itineraryId;
      private Airports departureAirportCode;
      private Airports destinationAirportCode;
      private LocalDateTime date;
@@ -16,8 +16,8 @@ public class Itinerary {
     public Itinerary() {
     }
 
-    public Itinerary(long ticketId, Airports departureAirportCode, Airports destinationAirportCode, LocalDateTime date, String airline, BigDecimal basicPrice) {
-        this.ticketId = ticketId;
+    public Itinerary(long itineraryId, Airports departureAirportCode, Airports destinationAirportCode, LocalDateTime date, String airline, BigDecimal basicPrice) {
+        this.itineraryId = itineraryId;
         this.departureAirportCode = departureAirportCode;
         this.destinationAirportCode = destinationAirportCode;
         this.date = date;
@@ -25,12 +25,12 @@ public class Itinerary {
         this.basicPrice = basicPrice;
     }
 
-    public long getTicketId() {
-        return ticketId;
+    public long getItineraryId() {
+        return itineraryId;
     }
 
-    public void setTicketId(long ticketId) {
-        this.ticketId = ticketId;
+    public void setTicketId(long itineraryId) {
+        this.itineraryId = itineraryId;
     }
 
     public Airports getDepartureAirportCode() {
@@ -75,7 +75,7 @@ public class Itinerary {
 
     @Override
     public String toString() {
-        return "Itinerary{" + "ticketId=" + ticketId + ", departureAirportCode=" + departureAirportCode + ", destinationAirportCode=" + destinationAirportCode + ", date=" + date + ", airline=" + airline + ", basicPrice=" + basicPrice + '}';
+        return "Itinerary{" + "itineraryId=" + itineraryId + ", departureAirportCode=" + departureAirportCode + ", destinationAirportCode=" + destinationAirportCode + ", date=" + date + ", airline=" + airline + ", basicPrice=" + basicPrice + '}';
     }
 
    

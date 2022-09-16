@@ -18,7 +18,7 @@ public class Ticket {
         this.customer = customer;
     }
     
-    public List<BookTicket> getbookedTickets() {
+    public List<BookTicket> getBookedTickets() {
         return bookedTickets;
     }
 

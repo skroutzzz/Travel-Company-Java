@@ -1,6 +1,9 @@
 
 package com.travelcompany.eshop.domain;
 
+import com.travelcompany.eshop.exception.CustomerException;
+import com.travelcompany.eshop.utility.GeneralUtility;
+
 
 public class Customer {
     private long customerId;
@@ -11,7 +14,9 @@ public class Customer {
     private String nationality;
     private CustomerCategory category;
 
-    public Customer(long id, String firstName, String surname, String address, String email, String nationality, CustomerCategory category) {
+    public Customer(long id, String firstName, String surname, String address, String email, String nationality, CustomerCategory category) throws CustomerException{
+        if (!GeneralUtility.isValidEmail(email))
+             throw new CustomerException("Invalid email");
         this.customerId = id;
         this.firstName = firstName;
         this.surname = surname;

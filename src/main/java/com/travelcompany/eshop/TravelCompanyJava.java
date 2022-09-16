@@ -1,19 +1,45 @@
 
 package com.travelcompany.eshop;
 
-import com.travelcompany.eshop.domain.Customer;
-import com.travelcompany.eshop.domain.CustomerCategory;
-import com.travelcompany.eshop.domain.Itinerary;
+
+import com.travelcompany.eshop.service.TravelService;
+import com.travelcompany.eshop.service.impl.TravelServiceImpl;
+
+
 
 
 public class TravelCompanyJava {
 
     public static void main(String[] args) {
-        //(long id, String firstName, String surname, String address, String email, String nationality, CustomerCategory category
-        Customer customer = new Customer(9, "Maria", "Iordanou", "Athens", "miordanou@mail.com", "Greek", CustomerCategory.valueOf("INDIVIDUAL"));
-        System.out.println("The first customer: " + customer.toString() );
-        //System.out.println("The customer is: " + customers[0].toString());
-        //Itinerary itinerary = new Itinerary("2,ATH,DUB,2022-07-08,SkyAirlines,235");
+
+
+      TravelService travel = new TravelServiceImpl();        
+      travel.loadInitialCustomerData();
+        
+      System.out.println("Display all Customers: \n " + travel.displayCustomers());
+      
+      travel.loadInitialItineraryData();
+      System.out.println("Display all Itineraries: \n " + travel.displayItineraries());
+      
+      
+      long customerId = 1;
+      long[] itineraryIds = new long[]{2, 3};
+      long ticketId = 1;
+      
+      travel.createTicket(ticketId, customerId, itineraryIds);
+      
+      
+      //Stack Overflow Error in these 2 methods.
+       //System.out.println(travel.displayTicketsCustomer(customerId));
+       //System.out.println(travel.displayTickets(ticketId));
+      
+      
+      
+      
+      
+        
+        
+        
     /**
      *
      */
