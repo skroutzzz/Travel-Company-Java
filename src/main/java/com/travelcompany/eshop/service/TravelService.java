@@ -2,6 +2,7 @@
 package com.travelcompany.eshop.service;
 
 import com.travelcompany.eshop.domain.Airports;
+import com.travelcompany.eshop.domain.PaymentMethod;
 import com.travelcompany.eshop.domain.Ticket;
 
 
@@ -9,10 +10,10 @@ public interface TravelService {
     
     void loadInitialCustomerData();
     void loadInitialItineraryData();
-    Ticket createTicket(long ticketId, long customerId, long itineraryId);
+    Ticket createTicket(long ticketId, long customerId, long itineraryId, PaymentMethod paymentMethod);
     
     String displayTicketsCustomer(long customerId);
-    //String displayTicket(long ticketId);
+    String displayTicket(long ticketId);
     String displayTickets();
     
     String displayItineraries();

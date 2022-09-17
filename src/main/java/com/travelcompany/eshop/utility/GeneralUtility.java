@@ -20,7 +20,7 @@ public class GeneralUtility {
       "6,Mario,Conti,Rome,mconti@mail.com,Italian,BUSINESS",
       "7,Nathan,Martin,Lyon,nmartin@mail.com,French,BUSINESS",
       "8,Enzo,Collin,Lyon,ecollin@mail.com,French,INDIVIDUAL",
-      "9,Frederic,Michel,Athens,fmichel@mail.com,French,INDIVIDUAL"
+      "9,Frederic,Michel,Athens,fmichel@travelcompany.com,French,INDIVIDUAL"
   };
     //long itineraryId, Airports departureAirportCode, Airports destinationAirportCode, LocalDateTime date, String airline, BigDecimal basicPrice
     public static String[] itinerarys = {

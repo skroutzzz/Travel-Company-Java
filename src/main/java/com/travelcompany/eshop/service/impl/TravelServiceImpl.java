@@ -74,7 +74,7 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
-    public Ticket createTicket(long ticketId, long customerId, long itineraryId) {
+    public Ticket createTicket(long ticketId, long customerId, long itineraryId, PaymentMethod paymentMethod) {
         Ticket ticket = new Ticket();
         ticket.setTicketId(ticketId);
         
@@ -84,11 +84,24 @@ public class TravelServiceImpl implements TravelService {
          
         Itinerary itinerary = itineraryRepository.readItinerary(itineraryId);
         if(itinerary == null) return null;
+        
         ticket.setItinerary(itinerary);
+        ticket.setPaymentMethod(paymentMethod);
         ticket.setBasicPrice(itinerary.getBasicPrice());
-        ticket.setPaymentMethod(PaymentMethod.CASH);
-        ticket.setDiscount(BigDecimal.ZERO);
+        
+        if(ticket.getCustomer().getCategory() == CustomerCategory.BUSINESS && ticket.getPaymentMethod() == PaymentMethod.CREDIT)
+            ticket.setDiscount(new BigDecimal("0.2"));
+        else if(ticket.getCustomer().getCategory() == CustomerCategory.BUSINESS && ticket.getPaymentMethod() == PaymentMethod.CASH)
+            ticket.setDiscount(new BigDecimal("0.1"));
+        
+        else if(ticket.getCustomer().getCategory() == CustomerCategory.INDIVIDUAL && ticket.getPaymentMethod() == PaymentMethod.CREDIT)
+            ticket.setDiscount(new BigDecimal("-0.1"));
+        else if(ticket.getCustomer().getCategory() == CustomerCategory.INDIVIDUAL && ticket.getPaymentMethod() == PaymentMethod.CASH)
+            ticket.setDiscount(new BigDecimal("-0.2"));
+        
+        
         ticketRepository.addTicket(ticket);
+        
         return ticket;
         
 //            if(ticket.getCustomer().getCategory() == CustomerCategory.INDIVIDUAL){
@@ -108,23 +121,17 @@ public class TravelServiceImpl implements TravelService {
         return returnValue.toString();
     }
 
-//    @Override
-//    public String displayTicket(long ticketId) {
-//        Ticket ticket = ticketRepository.readTicket(ticketId);
-//        StringBuilder returnString = new StringBuilder();
-//        returnString.append("Ticket No. ").append(ticket.getTicketId()).append("\n") 
-//            .append("Customer: ").append(ticket.getCustomer()).append("\n") 
-//            .append("Tickets in the order").append("\n");
-//        int index = 0;
-//        for (BookTicket itinerary: ticket.getBookedTickets()){
-//            returnString.append("")
-//                    .append(++index)
-//                    .append(". ")
-//                    .append(itinerary)
-//                    .append("\n");
-//        }
-//        return returnString.toString();
-//    }
+    @Override
+    public String displayTicket(long ticketId) {
+        Ticket ticket = ticketRepository.readTicket(ticketId);
+        StringBuilder returnString = new StringBuilder();
+        returnString.append("Ticket No. ").append(ticket.getTicketId()).append("\n"); 
+        if(ticket.getTicketId() == ticketId)
+            returnString.append(ticket).append("\n");
+        
+       
+        return returnString.toString();
+    }
 
     @Override
     public String displayItineraries() {
