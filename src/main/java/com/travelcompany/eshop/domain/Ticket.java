@@ -13,22 +13,20 @@ public class Ticket {
      private BigDecimal basicPrice;
      private PaymentMethod paymentMethod;
      private BigDecimal discount;
-    
+     private BigDecimal paymentAmount;
 
     public Ticket() {
     }
 
-    public Ticket(long ticketId, Customer customer, Itinerary itinerary, BigDecimal basicPrice, PaymentMethod paymentMethod, BigDecimal discount) {
+    public Ticket(long ticketId, Customer customer, Itinerary itinerary, BigDecimal basicPrice, PaymentMethod paymentMethod, BigDecimal discount, BigDecimal paymentAmount) {
         this.ticketId = ticketId;
         this.customer = customer;
         this.itinerary = itinerary;
         this.basicPrice = basicPrice;
         this.paymentMethod = paymentMethod;
         this.discount = discount;
+        this.paymentAmount = paymentAmount;
     }
-
-    
- 
 
     public long getTicketId() {
         return ticketId;
@@ -78,11 +76,20 @@ public class Ticket {
         this.discount = discount;
     }
 
+    public BigDecimal getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public void setPaymentAmount(BigDecimal paymentAmount) {
+        this.paymentAmount = paymentAmount;
+    }
+
     @Override
     public String toString() {
-        return "Ticket{" + "ticketId=" + ticketId + ", customer=" + customer + ", itinerary=" + itinerary + ", basicPrice=" + basicPrice + ", paymentMethod=" + paymentMethod + ", discount=" + discount + '}';
+        return "Ticket{" + "ticketId=" + ticketId + ", customer=" + customer + ", itinerary=" + itinerary + ", basicPrice=" + basicPrice + ", paymentMethod=" + paymentMethod + ", discount=" + discount + ", paymentAmount=" + paymentAmount + '}';
     }
-     
-     
+    
+
+ 
 
 }

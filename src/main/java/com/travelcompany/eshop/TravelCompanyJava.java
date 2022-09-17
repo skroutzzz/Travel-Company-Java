@@ -34,10 +34,14 @@ public class TravelCompanyJava {
 //      long itineraryId = 2;
 //      long ticketId = 1;
       
-      travel.createTicket(1, 2, 1, PaymentMethod.CASH);
-      travel.createTicket(2, 3, 3, PaymentMethod.CASH);
-      travel.createTicket(3, 2, 5, PaymentMethod.CREDIT);
-      travel.createTicket(4, 3, 6, PaymentMethod.CREDIT);
+      travel.createTicket(1, 1, 2, PaymentMethod.CASH);
+      travel.createTicket(2, 2, 3, PaymentMethod.CASH);
+      travel.createTicket(3, 3, 3, PaymentMethod.CREDIT);
+      travel.createTicket(4, 2, 4, PaymentMethod.CREDIT);
+      travel.createTicket(5, 3, 4, PaymentMethod.CASH);
+      travel.createTicket(6, 4, 7, PaymentMethod.CREDIT);
+      travel.createTicket(7, 5, 7, PaymentMethod.CREDIT);
+      
       
       
       

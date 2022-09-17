@@ -15,4 +15,3 @@ com\travelcompany\eshop\domain\Ticket.class
 com\travelcompany\eshop\exception\CustomerException.class
 com\travelcompany\eshop\domain\Customer.class
 com\travelcompany\eshop\service\TravelService.class
-com\travelcompany\eshop\domain\BookTicket.class

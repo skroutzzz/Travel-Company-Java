@@ -99,7 +99,15 @@ public class TravelServiceImpl implements TravelService {
         else if(ticket.getCustomer().getCategory() == CustomerCategory.INDIVIDUAL && ticket.getPaymentMethod() == PaymentMethod.CASH)
             ticket.setDiscount(new BigDecimal("-0.2"));
         
+        //BigDecimal basicPrice = new BigDecimal(ticket.getBasicPrice());
+        //BigDecimal discount = new BigDecimal("ticket.getDiscount()");
+        BigDecimal multiply = new BigDecimal("1");
+        BigDecimal paymentAmount = new BigDecimal("0");
         
+        multiply = ticket.getBasicPrice().multiply(ticket.getDiscount());
+        paymentAmount = ticket.getBasicPrice().subtract(multiply);
+        
+        ticket.setPaymentAmount(paymentAmount);
         ticketRepository.addTicket(ticket);
         
         return ticket;
