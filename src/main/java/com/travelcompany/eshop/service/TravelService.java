@@ -1,6 +1,7 @@
 
 package com.travelcompany.eshop.service;
 
+import com.travelcompany.eshop.domain.Airports;
 import com.travelcompany.eshop.domain.Ticket;
 
 
@@ -11,10 +12,15 @@ public interface TravelService {
     Ticket createTicket(long ticketId, long customerId, long[] itineraryIds);
     
     String displayTicketsCustomer(long customerId);
-    String displayTickets(long ticketId);
+    String displayTicket(long ticketId);
+    String displayTickets();
     
     String displayItineraries();
     String displayCustomers();
+    
+    String displayItineraryDeparture(Airports departureAirportCode);
+    String displayItineraryDestination(Airports destinationAirportCode);
+    
     
     String displayCustomersNoTicket(long customerId);
     String displayCustomerMostTicket(long customerId);

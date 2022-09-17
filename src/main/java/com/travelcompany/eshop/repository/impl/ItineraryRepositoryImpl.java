@@ -1,6 +1,7 @@
 
 package com.travelcompany.eshop.repository.impl;
 
+import com.travelcompany.eshop.domain.Airports;
 import com.travelcompany.eshop.domain.Itinerary;
 import com.travelcompany.eshop.repository.ItineraryRepository;
 import java.util.ArrayList;
@@ -10,10 +11,16 @@ import java.util.List;
 public class ItineraryRepositoryImpl implements ItineraryRepository {
     
      private final List<Itinerary> itineraries;
+     private final List<Itinerary> departureItineraries;
+     private final List<Itinerary> destinationItineraries;
 
     public ItineraryRepositoryImpl() {
          itineraries = new ArrayList<>();
+         departureItineraries = new ArrayList<>();
+         destinationItineraries = new ArrayList<>();
     }
+    
+   
 
     @Override
     public boolean addItinerary(Itinerary itinerary) {
@@ -39,10 +46,35 @@ public class ItineraryRepositoryImpl implements ItineraryRepository {
         }
         return null; 
     }
+    
+    @Override
+    public List<Itinerary> readItineraryDeparture(Airports departureAirportCode) {
+        for (Itinerary itinerary:itineraries){
+            if (itinerary.getDepartureAirportCode() == departureAirportCode){
+                   departureItineraries.add(itinerary);
+                   
+            }
+        }
+        return departureItineraries;
+    }
+    
+    
+    
 
     @Override
     public boolean deleteItinerary(long itineraryId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Itinerary> readItineraryDestination(Airports destinationAirportCode) {
+         for (Itinerary itinerary:itineraries){
+            if (itinerary.getDestinationAirportCode() == destinationAirportCode){
+                   destinationItineraries.add(itinerary);
+                   
+            }
+        }
+        return destinationItineraries;
     }
     
 }

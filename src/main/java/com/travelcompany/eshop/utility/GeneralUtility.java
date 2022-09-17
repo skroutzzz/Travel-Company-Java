@@ -2,6 +2,7 @@
 package com.travelcompany.eshop.utility;
 
 import com.travelcompany.eshop.domain.Customer;
+import com.travelcompany.eshop.domain.CustomerCategory;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,6 +52,7 @@ public class GeneralUtility {
         
         return true;
       }
-    
-    
+     
 }
+    
+

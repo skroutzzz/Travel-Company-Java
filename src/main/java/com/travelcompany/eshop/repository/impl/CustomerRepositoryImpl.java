@@ -2,6 +2,7 @@
 package com.travelcompany.eshop.repository.impl;
 
 import com.travelcompany.eshop.domain.Customer;
+import com.travelcompany.eshop.domain.CustomerCategory;
 import com.travelcompany.eshop.repository.CustomerRepository;
 import com.travelcompany.eshop.utility.GeneralUtility;
 //import gr.codehub.javaintroduction.utility.GeneralUtility;
@@ -63,10 +64,27 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         }
         return null; 
     }
+    
+    
 
     @Override
     public boolean deleteCustomer(long customerId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public boolean customerType(CustomerCategory customerType) {
+        for(Customer customer:customers){
+            if (customer.getCategory() == customerType.INDIVIDUAL)
+                return true;
+            else 
+                return false;
+        }
+        
+        return false;
+    }
+    
+           
     
 }
+//if (customer.getCategory() == customerType.BUSINESS)

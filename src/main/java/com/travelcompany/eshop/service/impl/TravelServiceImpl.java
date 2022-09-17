@@ -6,6 +6,7 @@ import com.travelcompany.eshop.domain.BookTicket;
 import com.travelcompany.eshop.domain.Customer;
 import com.travelcompany.eshop.domain.CustomerCategory;
 import com.travelcompany.eshop.domain.Itinerary;
+import com.travelcompany.eshop.domain.PaymentMethod;
 import com.travelcompany.eshop.domain.Ticket;
 import com.travelcompany.eshop.exception.CustomerException;
 import com.travelcompany.eshop.repository.CustomerRepository;
@@ -79,8 +80,13 @@ public class TravelServiceImpl implements TravelService {
         
         Customer customer = customerRepository.readCustomer(customerId);
         if (customer == null) return null;
+       
+        
         ticket.setCustomer(customer);
-        //ticket.setDate(LocalDateTime.now());
+        
+        //if(ticket.getCustomer().getCategory() == CustomerCategory.INDIVIDUAL);
+        
+      
         
         for (long itineraryId: itineraryIds){
             BookTicket bookTicket = new BookTicket();
@@ -88,17 +94,23 @@ public class TravelServiceImpl implements TravelService {
             Itinerary itinerary = itineraryRepository.readItinerary(itineraryId);
             if (itinerary == null) continue;
             bookTicket.setItinerary(itinerary);
+            
+//            if(ticket.getCustomer().getCategory() == CustomerCategory.INDIVIDUAL){
+//            bookTicket.setDiscount(new BigDecimal("0.1"));   //bookTicket.getDiscount()
+//            }
+            
             bookTicket.setBasicPrice(itinerary.getBasicPrice());
-            bookTicket.setPaymentMethod(bookTicket.getPaymentMethod()); //bookTicket.getPaymentMethod()
-            
-            
-            bookTicket.setDiscount(bookTicket.getDiscount());  //bookTicket.getDiscount()
+            bookTicket.setPaymentMethod(PaymentMethod.valueOf("CASH")); //bookTicket.getPaymentMethod()
+            bookTicket.setDiscount(BigDecimal.ZERO);
             
 
             ticket.getBookedTickets().add(bookTicket);
         }
         ticketRepository.addTicket(ticket);
+       // ticketRepository.readTicket(ticketId);
         return ticket;
+        
+        
     }
 
     @Override
@@ -114,7 +126,7 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
-    public String displayTickets(long ticketId) {
+    public String displayTicket(long ticketId) {
         Ticket ticket = ticketRepository.readTicket(ticketId);
         StringBuilder returnString = new StringBuilder();
         returnString.append("Ticket No. ").append(ticket.getTicketId()).append("\n") 
@@ -157,4 +169,44 @@ public class TravelServiceImpl implements TravelService {
     public String displayCustomerLargestCost(long customerId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public String displayTickets() {
+        StringBuilder returnValue= new StringBuilder();
+        returnValue.append("These are the tickets \n");
+        for(Ticket ticket: ticketRepository.readTicket()){
+            returnValue.append(ticket);
+            returnValue.append("\n");
+            
+        }
+        returnValue.append("-------------------------------------------\n");
+        return returnValue.toString();
+    }
+
+    @Override
+    public String displayItineraryDeparture(Airports departureAirportCode) {
+        
+        StringBuilder returnValue= new StringBuilder();
+        returnValue.append("Itineraries from: " );
+        for(Itinerary itinerary: itineraryRepository.readItineraryDeparture(departureAirportCode)){
+            returnValue.append(itinerary);
+            returnValue.append("\n");
+        }
+        returnValue.append("-------------------------------------------\n");
+        return returnValue.toString();
+        
+    }
+
+    @Override
+    public String displayItineraryDestination(Airports destinationAirportCode) {
+        StringBuilder returnValue= new StringBuilder();
+        returnValue.append("Itineraries to: " );
+        for(Itinerary itinerary: itineraryRepository.readItineraryDestination(destinationAirportCode)){
+            returnValue.append(itinerary);
+            returnValue.append("\n");
+        }
+        returnValue.append("-------------------------------------------\n");
+        return returnValue.toString();
+    }
+          
 }
