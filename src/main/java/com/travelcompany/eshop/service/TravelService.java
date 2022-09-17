@@ -9,10 +9,10 @@ public interface TravelService {
     
     void loadInitialCustomerData();
     void loadInitialItineraryData();
-    Ticket createTicket(long ticketId, long customerId, long[] itineraryIds);
+    Ticket createTicket(long ticketId, long customerId, long itineraryId);
     
     String displayTicketsCustomer(long customerId);
-    String displayTicket(long ticketId);
+    //String displayTicket(long ticketId);
     String displayTickets();
     
     String displayItineraries();

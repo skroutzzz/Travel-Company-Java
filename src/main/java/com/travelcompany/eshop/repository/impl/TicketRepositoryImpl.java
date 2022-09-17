@@ -16,9 +16,6 @@ public class TicketRepositoryImpl implements TicketRepository{
     }
     
     
-    
-    
-
     @Override
     public boolean addTicket(Ticket ticket) {
         for (int index = 0; index < tickets.size(); index++){

@@ -35,6 +35,12 @@ public class GeneralUtility {
     "9,ATH,DUB,2022-02-22T10:16:35,Skylines,770"
     };
     
+    
+//    public static String[] tickets = {
+//    "1,"
+//    
+//    }
+    
      public static boolean isValidEmail(String email){
         String regex = "^(.+)@(.+)$";
         Pattern pattern = Pattern.compile(regex);

@@ -2,7 +2,7 @@
 package com.travelcompany.eshop.service.impl;
 
 import com.travelcompany.eshop.domain.Airports;
-import com.travelcompany.eshop.domain.BookTicket;
+
 import com.travelcompany.eshop.domain.Customer;
 import com.travelcompany.eshop.domain.CustomerCategory;
 import com.travelcompany.eshop.domain.Itinerary;
@@ -74,43 +74,26 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
-    public Ticket createTicket(long ticketId, long customerId, long[] itineraryIds) {
+    public Ticket createTicket(long ticketId, long customerId, long itineraryId) {
         Ticket ticket = new Ticket();
         ticket.setTicketId(ticketId);
         
         Customer customer = customerRepository.readCustomer(customerId);
         if (customer == null) return null;
-       
-        
         ticket.setCustomer(customer);
-        
-        //if(ticket.getCustomer().getCategory() == CustomerCategory.INDIVIDUAL);
-        
-      
-        
-        for (long itineraryId: itineraryIds){
-            BookTicket bookTicket = new BookTicket();
-            bookTicket.setTicket(ticket);
-            Itinerary itinerary = itineraryRepository.readItinerary(itineraryId);
-            if (itinerary == null) continue;
-            bookTicket.setItinerary(itinerary);
-            
-//            if(ticket.getCustomer().getCategory() == CustomerCategory.INDIVIDUAL){
-//            bookTicket.setDiscount(new BigDecimal("0.1"));   //bookTicket.getDiscount()
-//            }
-            
-            bookTicket.setBasicPrice(itinerary.getBasicPrice());
-            bookTicket.setPaymentMethod(PaymentMethod.valueOf("CASH")); //bookTicket.getPaymentMethod()
-            bookTicket.setDiscount(BigDecimal.ZERO);
-            
-
-            ticket.getBookedTickets().add(bookTicket);
-        }
+         
+        Itinerary itinerary = itineraryRepository.readItinerary(itineraryId);
+        if(itinerary == null) return null;
+        ticket.setItinerary(itinerary);
+        ticket.setBasicPrice(itinerary.getBasicPrice());
+        ticket.setPaymentMethod(PaymentMethod.CASH);
+        ticket.setDiscount(BigDecimal.ZERO);
         ticketRepository.addTicket(ticket);
-       // ticketRepository.readTicket(ticketId);
         return ticket;
         
-        
+//            if(ticket.getCustomer().getCategory() == CustomerCategory.INDIVIDUAL){
+//            bookTicket.setDiscount(new BigDecimal("0.1"));   //bookTicket.getDiscount()
+//            }    
     }
 
     @Override
@@ -125,23 +108,23 @@ public class TravelServiceImpl implements TravelService {
         return returnValue.toString();
     }
 
-    @Override
-    public String displayTicket(long ticketId) {
-        Ticket ticket = ticketRepository.readTicket(ticketId);
-        StringBuilder returnString = new StringBuilder();
-        returnString.append("Ticket No. ").append(ticket.getTicketId()).append("\n") 
-            .append("Customer: ").append(ticket.getCustomer()).append("\n") 
-            .append("Tickets in the order").append("\n");
-        int index = 0;
-        for (BookTicket itinerary: ticket.getBookedTickets()){
-            returnString.append("")
-                    .append(++index)
-                    .append(". ")
-                    .append(itinerary)
-                    .append("\n");
-        }
-        return returnString.toString();
-    }
+//    @Override
+//    public String displayTicket(long ticketId) {
+//        Ticket ticket = ticketRepository.readTicket(ticketId);
+//        StringBuilder returnString = new StringBuilder();
+//        returnString.append("Ticket No. ").append(ticket.getTicketId()).append("\n") 
+//            .append("Customer: ").append(ticket.getCustomer()).append("\n") 
+//            .append("Tickets in the order").append("\n");
+//        int index = 0;
+//        for (BookTicket itinerary: ticket.getBookedTickets()){
+//            returnString.append("")
+//                    .append(++index)
+//                    .append(". ")
+//                    .append(itinerary)
+//                    .append("\n");
+//        }
+//        return returnString.toString();
+//    }
 
     @Override
     public String displayItineraries() {

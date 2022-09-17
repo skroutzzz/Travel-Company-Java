@@ -1,6 +1,7 @@
 
 package com.travelcompany.eshop.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,19 +9,26 @@ import java.util.List;
 public class Ticket {
      private long ticketId;
      private Customer customer;
-     private final List<BookTicket> bookedTickets = new ArrayList<>();
+     private Itinerary itinerary;
+     private BigDecimal basicPrice;
+     private PaymentMethod paymentMethod;
+     private BigDecimal discount;
+    
 
     public Ticket() {
     }
 
-    public Ticket(long ticketId, Customer customer) {
+    public Ticket(long ticketId, Customer customer, Itinerary itinerary, BigDecimal basicPrice, PaymentMethod paymentMethod, BigDecimal discount) {
         this.ticketId = ticketId;
         this.customer = customer;
+        this.itinerary = itinerary;
+        this.basicPrice = basicPrice;
+        this.paymentMethod = paymentMethod;
+        this.discount = discount;
     }
+
     
-    public List<BookTicket> getBookedTickets() {
-        return bookedTickets;
-    }
+ 
 
     public long getTicketId() {
         return ticketId;
@@ -38,10 +46,43 @@ public class Ticket {
         this.customer = customer;
     }
 
+    public Itinerary getItinerary() {
+        return itinerary;
+    }
+
+    public void setItinerary(Itinerary itinerary) {
+        this.itinerary = itinerary;
+    }
+
+    public BigDecimal getBasicPrice() {
+        return basicPrice;
+    }
+
+    public void setBasicPrice(BigDecimal basicPrice) {
+        this.basicPrice = basicPrice;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
     @Override
     public String toString() {
-        return "Ticket{" + "ticketId=" + ticketId + ", customer=" + customer + ", bookedTickets=" + bookedTickets + '}';
+        return "Ticket{" + "ticketId=" + ticketId + ", customer=" + customer + ", itinerary=" + itinerary + ", basicPrice=" + basicPrice + ", paymentMethod=" + paymentMethod + ", discount=" + discount + '}';
     }
      
      
+
 }
